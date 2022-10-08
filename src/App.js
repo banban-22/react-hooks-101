@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 
-function App() {
+const App = (props) => {
+  const [state, setState] = useState(props);
+  const { name, price } = state;
+
+  useEffect(() => {
+    console.log('This is like componentDidMount or componentDidUpdate');
+  });
+
+  useEffect(() => {
+    console.log('This is like componentDidMount');
+  }, []);
+
+  useEffect(() => {
+    console.log('This callback is for name only');
+  }, [name]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <p>
+        Current {name} costs {price} yen.
+      </p>
+      <button onClick={() => setState({ ...state, price: price + 1 })}>
+        +1
+      </button>
+      <button onClick={() => setState({ ...state, price: price - 1 })}>
+        -1
+      </button>
+      <button onClick={() => setState(props)}>Reset</button>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setState({ ...state, name: e.target.value })}
+      />
+    </>
   );
-}
+};
+
+App.defaultProps = {
+  name: '',
+  price: 1000,
+};
 
 export default App;
