@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AppContext from '../contexts/AppContext';
 
-const Event = ({ event, dispatch }) => {
+const Event = ({ event }) => {
+  const { dispatch } = useContext(AppContext);
   const { id, title, content } = event;
   const handleClickDeleteButton = () => {
     const DELETE_EVENT = 'DELETE_EVENT';
