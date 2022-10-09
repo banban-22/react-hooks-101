@@ -21,6 +21,16 @@ const App = () => {
     setcontent('');
   };
 
+  const deleteAllEvents = (e) => {
+    e.preventDefault();
+    const result = window.confirm('Are you sure to delete all?');
+    if (result) {
+      dispatch({ type: 'DELETE_ALL_EVENTS' });
+    }
+  };
+
+  const uncreatable = title === '' || content === '';
+
   return (
     <div className="container-fluid">
       <h4>Event Creating Form</h4>
@@ -47,10 +57,20 @@ const App = () => {
           />
         </div>
 
-        <button className="btn btn-primary" onClick={addEvent}>
+        <button
+          className="btn btn-primary"
+          onClick={addEvent}
+          disabled={uncreatable}
+        >
           Create Event
         </button>
-        <button className="btn btn-danger">Delete All Events</button>
+        <button
+          className="btn btn-danger"
+          onClick={deleteAllEvents}
+          disabled={state.length === 0}
+        >
+          Delete All Events
+        </button>
       </form>
 
       <h4>Show Events</h4>
