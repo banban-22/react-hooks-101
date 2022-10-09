@@ -3,7 +3,8 @@ import React from 'react';
 const Event = ({ event, dispatch }) => {
   const { id, title, content } = event;
   const handleClickDeleteButton = () => {
-    dispatch({ type: 'DELETE_EVENT', id });
+    const DELETE_EVENT = 'DELETE_EVENT';
+    dispatch({ type: DELETE_EVENT, id });
   };
 
   return (
