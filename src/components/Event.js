@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import AppContext from '../contexts/AppContext';
+import { currentTime } from '../utils';
 
 const Event = ({ event }) => {
   const { dispatch } = useContext(AppContext);
@@ -7,6 +8,11 @@ const Event = ({ event }) => {
   const handleClickDeleteButton = () => {
     const DELETE_EVENT = 'DELETE_EVENT';
     dispatch({ type: DELETE_EVENT, id });
+    dispatch({
+      type: 'ADD_OPERATION_LOG',
+      description: 'deleted event',
+      operatedAt: currentTime(),
+    });
   };
 
   return (

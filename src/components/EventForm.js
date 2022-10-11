@@ -20,7 +20,7 @@ const EventForm = () => {
     dispatch({
       type: 'ADD_OPERATION_LOG',
       description: 'Event Created',
-      operatedAt: currentTime,
+      operatedAt: currentTime(),
     });
 
     setTitle('');
@@ -35,7 +35,7 @@ const EventForm = () => {
       dispatch({
         type: 'ADD_OPERATION_LOG',
         description: 'All Events are deleted',
-        operatedAt: currentTime,
+        operatedAt: currentTime(),
       });
     }
   };
