@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import AppContext from '../contexts/AppContext';
+import { currentTime } from '../utils';
 
 const EventForm = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -16,6 +17,12 @@ const EventForm = () => {
       content,
     });
 
+    dispatch({
+      type: 'ADD_OPERATION_LOG',
+      description: 'Event Created',
+      operatedAt: currentTime,
+    });
+
     setTitle('');
     setcontent('');
   };
@@ -25,6 +32,11 @@ const EventForm = () => {
     const result = window.confirm('Are you sure to delete all?');
     if (result) {
       dispatch({ type: 'DELETE_ALL_EVENTS' });
+      dispatch({
+        type: 'ADD_OPERATION_LOG',
+        description: 'All Events are deleted',
+        operatedAt: currentTime,
+      });
     }
   };
 
